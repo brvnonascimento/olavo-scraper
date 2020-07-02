@@ -8,20 +8,23 @@ import { removeSlash, toArray } from './utils';
     const browser = await launch();
     const page = await browser.newPage();
     await page.goto(ARTICLES_URL);
-
+    
     const lastPage = await getLastPage(page);
     console.log('Last page:', lastPage);
-
+    page.close();
+    
     const getArticleLinks = async (lastPage: number) => {
         let links: string[] = [];
 
         for (let i = 1; i <= lastPage; i++) {
             console.log(`Buscando links em página ${i} de ${lastPage}...`)
             const articlesPage = await browser.newPage();
+            articlesPage.setDefaultNavigationTimeout(0);
             await articlesPage.goto(`${ARTICLES_URL}page/${i}/`)
             const articles = await getLinksFromPage(articlesPage);
 
             articles.forEach(article => links.push(article));
+            await articlesPage.close();
         }
 
         console.log('Links obtidos!')
@@ -37,6 +40,7 @@ import { removeSlash, toArray } from './utils';
         const articleName = removeSlash(link.split(BASE_URL)[1]);
     
         const article = await browser.newPage();
+        article.setDefaultNavigationTimeout(0);
         await article.goto(link);
         await article.evaluate(() => {
             const title = document.getElementById('page-title').innerText;
@@ -52,7 +56,7 @@ import { removeSlash, toArray } from './utils';
             `
         });
         await article.pdf({ path: `./articles/${articleName}.pdf`, format: 'A4' });
+        await article.close()
         console.log('PDF Gerado!')
     })
-    
 })()
