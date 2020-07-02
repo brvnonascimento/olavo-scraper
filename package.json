@@ -1,0 +1,28 @@
+{
+  "name": "olavo-scraper",
+  "version": "1.0.0",
+  "description": "Web Scraper usando Puppeteer para ajudar no trabalho de Mestrado em Ciências Sociais de um querido amigo. Primeira vez usando a biblioteca, o projeto se trata de um script para fazer crawling de todos artigos publicados no site pessoal do Olavo de Carvalho e convertê-los pra PDF.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brvnonascimento/olavo-scraper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brvnonascimento/olavo-scraper/issues"
+  },
+  "homepage": "https://github.com/brvnonascimento/olavo-scraper#readme",
+  "dependencies": {
+    "puppeteer": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^3.0.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
+  }
+}
